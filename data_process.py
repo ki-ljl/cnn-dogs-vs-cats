@@ -14,7 +14,7 @@ def Myloader(path):
     return Image.open(path).convert('RGB')
 
 
-# 得到一个包含路径与标签的列表
+# get a list of paths and labels
 def init_process(path, lens):
     data = []
     name = find_label(path)
@@ -57,12 +57,13 @@ def find_label(str):
 
 
 def load_data():
+    print('data processing...')
     transform = transforms.Compose([
         transforms.RandomHorizontalFlip(p=0.3),
         transforms.RandomVerticalFlip(p=0.3),
         transforms.Resize((256, 256)),
         transforms.ToTensor(),
-        transforms.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5))  # 归一化
+        transforms.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5))  # normalization
     ])
     path1 = 'data/training_data/cats/cat.%d.jpg'
     data1 = init_process(path1, [0, 500])
@@ -72,11 +73,11 @@ def load_data():
     data3 = init_process(path3, [1000, 1200])
     path4 = 'data/testing_data/dogs/dog.%d.jpg'
     data4 = init_process(path4, [1000, 1200])
-    # 1300个训练
+    # train
     train_data = data1 + data2 + data3[0:150] + data4[0:150]
 
     train = MyDataset(train_data, transform=transform, loder=Myloader)
-    # 100个测试
+    # test
     test_data = data3[150:200] + data4[150:200]
     test = MyDataset(test_data, transform=transform, loder=Myloader)
 
