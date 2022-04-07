@@ -123,7 +123,6 @@ def test():
         images, labels = images.to(device), labels.to(device)
         outputs = model(images)
         predicted = torch.max(outputs.data, 1)[1].data
-        # print(torch.max(outputs.data, 1)[1])
         total += labels.size(0)
         current += (predicted == labels).sum()
 
