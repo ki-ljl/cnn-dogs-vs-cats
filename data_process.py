@@ -14,7 +14,7 @@ def Myloader(path):
     return Image.open(path).convert('RGB')
 
 
-# get a list of paths and labels
+# get a list of paths and labels.
 def init_process(path, lens):
     data = []
     name = find_label(path)
@@ -34,6 +34,7 @@ class MyDataset(Dataset):
         img, label = self.data[item]
         img = self.loader(img)
         img = self.transform(img)
+        print(img.shape)
         return img, label
 
     def __len__(self):
@@ -41,6 +42,12 @@ class MyDataset(Dataset):
 
 
 def find_label(str):
+    """
+    Find image tags based on file paths.
+
+    :param str: file path
+    :return: image label
+    """
     first, last = 0, 0
     for i in range(len(str) - 1, -1, -1):
         if str[i] == '%' and str[i - 1] == '.':
