@@ -8,6 +8,7 @@
 from torchvision import transforms
 from torch.utils.data import Dataset, DataLoader
 from PIL import Image
+import numpy as np
 
 
 def Myloader(path):
@@ -25,16 +26,15 @@ def init_process(path, lens):
 
 
 class MyDataset(Dataset):
-    def __init__(self, data, transform, loder):
+    def __init__(self, data, transform, loader):
         self.data = data
         self.transform = transform
-        self.loader = loder
+        self.loader = loader
 
     def __getitem__(self, item):
         img, label = self.data[item]
         img = self.loader(img)
         img = self.transform(img)
-        print(img.shape)
         return img, label
 
     def __len__(self):
@@ -80,15 +80,16 @@ def load_data():
     data3 = init_process(path3, [1000, 1200])
     path4 = 'data/testing_data/dogs/dog.%d.jpg'
     data4 = init_process(path4, [1000, 1200])
-    # train
-    train_data = data1 + data2 + data3[0:150] + data4[0:150]
+    data = data1 + data2 + data3 + data4   # 1400
+    # shuffle
+    np.random.shuffle(data)
+    # train, val, test = 900 + 200 + 300
+    train_data, val_data, test_data = data[:900], data[900:1100], data[1100:]
+    train_data = MyDataset(train_data, transform=transform, loader=Myloader)
+    Dtr = DataLoader(dataset=train_data, batch_size=50, shuffle=True, num_workers=0)
+    val_data = MyDataset(val_data, transform=transform, loader=Myloader)
+    Val = DataLoader(dataset=val_data, batch_size=50, shuffle=True, num_workers=0)
+    test_data = MyDataset(test_data, transform=transform, loader=Myloader)
+    Dte = DataLoader(dataset=test_data, batch_size=50, shuffle=True, num_workers=0)
 
-    train = MyDataset(train_data, transform=transform, loder=Myloader)
-    # test
-    test_data = data3[150:200] + data4[150:200]
-    test = MyDataset(test_data, transform=transform, loder=Myloader)
-
-    train_data = DataLoader(dataset=train, batch_size=10, shuffle=True, num_workers=0)
-    test_data = DataLoader(dataset=test, batch_size=1, shuffle=True, num_workers=0)
-
-    return train_data, test_data
+    return Dtr, Val, Dte

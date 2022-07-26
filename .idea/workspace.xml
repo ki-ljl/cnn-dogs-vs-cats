@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a154f69a-ecfa-4eb0-8033-afb9f49c225a" name="默认更改列表" comment="默认更改列表">
-      <change beforePath="$PROJECT_DIR$/.idea/CNN-dogsVScats.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CNN-dogsVScats.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_process.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_process.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/cnn.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/model/cnn.pkl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +36,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="PyScientificConfigurable" />
   </component>
   <component name="RunManager">
     <configuration name="CNN" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -86,6 +86,14 @@
       <workItem from="1648301903160" duration="2626000" />
       <workItem from="1650120705473" duration="1338000" />
       <workItem from="1651758135251" duration="319000" />
+      <workItem from="1652071929168" duration="1187000" />
+      <workItem from="1654824664265" duration="246000" />
+      <workItem from="1654827439712" duration="594000" />
+      <workItem from="1654828674849" duration="425000" />
+      <workItem from="1657540955519" duration="435000" />
+      <workItem from="1657593199475" duration="35000" />
+      <workItem from="1658228253593" duration="372000" />
+      <workItem from="1658791567673" duration="4920000" />
     </task>
     <servers />
   </component>
@@ -104,6 +112,6 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CNN_dogsVScats$CNN.coverage" NAME="CNN Coverage Results" MODIFIED="1650120843023" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CNN_dogsVScats$CNN.coverage" NAME="CNN Coverage Results" MODIFIED="1658796372444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -6,15 +6,20 @@
 @Motto：Hungry And Humble
 
 """
+import copy
 import os
+import random
 
+import numpy as np
 import torch
 import torch.nn as nn
-import numpy as np
-import random
 from torch import optim
 from torch.autograd import Variable
+from tqdm import tqdm
+
 from data_process import load_data
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def setup_seed(seed):
@@ -81,50 +86,73 @@ class cnn(nn.Module):
         x = x.view(x.shape[0], -1)
         x = self.relu(self.fc1(x))
         x = self.relu(self.fc2(x))
-        x = self.out(x)
+        # x = self.sigmoid(self.out(x))
         return x
 
 
+def get_val_loss(model, Val):
+    model.eval()
+    criterion = nn.CrossEntropyLoss().to(device)
+    val_loss = []
+    for (data, target) in Val:
+        data, target = Variable(data).to(device), Variable(target.long()).to(device)
+        output = model(data)
+        loss = criterion(output, target)
+        val_loss.append(loss.cpu().item())
+
+    return np.mean(val_loss)
+
+
 def train():
-    train_loader, test_loader = load_data()
+    Dtr, Val, Dte = load_data()
     print('train...')
-    epoch_num = 15
-    # GPU
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    epoch_num = 30
+    best_model = None
+    min_epochs = 5
+    min_val_loss = 5
     model = cnn().to(device)
     optimizer = optim.Adam(model.parameters(), lr=0.0008)
     criterion = nn.CrossEntropyLoss().to(device)
-    for epoch in range(epoch_num):
-        for batch_idx, (data, target) in enumerate(train_loader, 0):
+    # criterion = nn.BCELoss().to(device)
+    for epoch in tqdm(range(epoch_num), ascii=True):
+        train_loss = []
+        for batch_idx, (data, target) in enumerate(Dtr, 0):
             data, target = Variable(data).to(device), Variable(target.long()).to(device)
+            # target = target.view(target.shape[0], -1)
+            # print(target)
             optimizer.zero_grad()
             output = model(data)
+            # print(output)
             loss = criterion(output, target)
             loss.backward()
             optimizer.step()
-            if batch_idx % 10 == 0:
-                print('Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                    epoch, batch_idx * len(data), len(train_loader.dataset),
-                           100. * batch_idx / len(train_loader), loss.item()))
+            train_loss.append(loss.cpu().item())
+        # validation
+        val_loss = get_val_loss(model, Val)
+        model.train()
+        if epoch + 1 > min_epochs and val_loss < min_val_loss:
+            min_val_loss = val_loss
+            best_model = copy.deepcopy(model)
 
-    torch.save(model.state_dict(), "model/cnn.pkl")
+        tqdm.write('Epoch {:03d} train_loss {:.5f} val_loss {:.5f}'.format(epoch, np.mean(train_loss), val_loss))
+
+    torch.save(best_model.state_dict(), "model/cnn.pkl")
 
 
 def test():
-    train_loader, test_loader = load_data()
+    Dtr, Val, Dte = load_data()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = cnn().to(device)
     model.load_state_dict(torch.load("model/cnn.pkl"), False)
     model.eval()
     total = 0
     current = 0
-    for data in test_loader:
-        images, labels = data
-        images, labels = images.to(device), labels.to(device)
-        outputs = model(images)
+    for (data, target) in Dte:
+        data, target = data.to(device), target.to(device)
+        outputs = model(data)
         predicted = torch.max(outputs.data, 1)[1].data
-        total += labels.size(0)
-        current += (predicted == labels).sum()
+        total += target.size(0)
+        current += (predicted == target).sum()
 
     print('Accuracy:%d%%' % (100 * current / total))
 
