@@ -18,6 +18,7 @@ from torch.autograd import Variable
 from tqdm import tqdm
 
 from data_process import load_data
+import torch.nn.functional as F
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -87,6 +88,7 @@ class cnn(nn.Module):
         x = self.relu(self.fc1(x))
         x = self.relu(self.fc2(x))
         # x = self.sigmoid(self.out(x))
+        x = F.log_softmax(x, dim=1)
         return x
 
 

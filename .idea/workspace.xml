@@ -4,8 +4,6 @@
     <list default="true" id="a154f69a-ecfa-4eb0-8033-afb9f49c225a" name="默认更改列表" comment="默认更改列表">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/CNN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_process.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_process.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/cnn.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/model/cnn.pkl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +91,13 @@
       <workItem from="1657540955519" duration="435000" />
       <workItem from="1657593199475" duration="35000" />
       <workItem from="1658228253593" duration="372000" />
-      <workItem from="1658791567673" duration="4920000" />
+      <workItem from="1658791567673" duration="5566000" />
+      <workItem from="1658807675181" duration="20000" />
+      <workItem from="1659094378130" duration="786000" />
+      <workItem from="1659099209553" duration="1623000" />
+      <workItem from="1659140557679" duration="349000" />
+      <workItem from="1659154879649" duration="230000" />
+      <workItem from="1659181993582" duration="2223000" />
     </task>
     <servers />
   </component>
@@ -112,6 +116,6 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CNN_dogsVScats$CNN.coverage" NAME="CNN Coverage Results" MODIFIED="1658796372444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CNN_dogsVScats$CNN.coverage" NAME="CNN Coverage Results" MODIFIED="1659184327647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
